@@ -1,2 +1,10 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+	import Container from '@components/Container.svelte';
+	import HabitList from '@components/HabitList.svelte';
+</script>
+
+<main>
+	<Container>
+		<HabitList />
+	</Container>
+</main>
