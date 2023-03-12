@@ -8,9 +8,10 @@ export interface Habit {
 	count: number;
 }
 
-const data = browser ? JSON.parse(window.localStorage.getItem('successTracker_habits')) ?? [] : [];
+const storedData = browser ? window.localStorage.getItem('successTracker_habits') : null;
+const data = storedData ? JSON.parse(storedData) : [];
 
-const habits = writable(data);
+const habits = writable<Habit[]>(data);
 
 habits.subscribe((value) => {
 	if (browser) {
@@ -18,9 +19,13 @@ habits.subscribe((value) => {
 	}
 });
 
+export function getHabits() {
+	return habits;
+}
+
 export function addHabit() {
 	habits.update((currentHabits) => {
-		return [...currentHabits, { id: uuidv4(), name: '' }];
+		return [...currentHabits, { id: uuidv4(), name: '', count: 0 }];
 	});
 }
 
