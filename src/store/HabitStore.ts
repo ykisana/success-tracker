@@ -23,9 +23,9 @@ export function getHabits() {
 	return habits;
 }
 
-export function addHabit() {
+export function addHabit(name: string) {
 	habits.update((currentHabits) => {
-		return [...currentHabits, { id: uuidv4(), name: '', count: 0 }];
+		return [...currentHabits, { id: uuidv4(), name: name, count: 0 }];
 	});
 }
 

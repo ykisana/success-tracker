@@ -1,6 +1,6 @@
 <script lang="ts">
-	export let isNew: boolean | undefined;
-	export let isHabit: boolean | undefined;
+	export let isNew: boolean = false;
+	export let isHabit: boolean = false;
 </script>
 
 <div class="card" class:new={isNew} class:habit={isHabit}>
