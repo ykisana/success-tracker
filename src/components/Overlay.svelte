@@ -4,7 +4,7 @@
 
 <div class="overlay">
 	<div class="card">
-		<button on:click={() => onClose()}>Toggle Modal</button>
+		<button class="closeButton" on:click={() => onClose()}>Toggle Modal</button>
 		<slot />
 	</div>
 </div>
@@ -23,9 +23,17 @@
 		align-items: center;
 	}
 	.card {
+		position: relative;
 		background-color: white;
 		width: 75%;
-		height: 5rem;
+		padding: 0.2rem;
 		border-radius: 1rem;
+	}
+
+	.closeButton {
+		position: absolute;
+		top: 0;
+		right: 0;
+		margin: 0.2rem;
 	}
 </style>
