@@ -1,14 +1,15 @@
-<script lang="ts">
-	import { addHabit } from '@store/HabitStore';
+<script>
+	import TypePicker from './TypePicker.svelte';
 </script>
 
 <div class="addHabitContainer">
-	<button on:click={() => addHabit('Todo')}>Add Habit</button>
+	<TypePicker />
 </div>
 
 <style>
 	.addHabitContainer {
 		display: flex;
+		flex-direction: column;
 		justify-content: center;
 		justify-items: center;
 	}

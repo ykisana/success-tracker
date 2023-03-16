@@ -6,6 +6,7 @@ export interface Habit {
 	id: string;
 	createdAt: Date;
 	lastReset: Date;
+	type: HabitType;
 	name: string;
 	logs: Log[];
 }
@@ -13,6 +14,11 @@ export interface Habit {
 export interface Log {
 	id: string;
 	createdAt: Date;
+}
+
+export enum HabitType {
+	Develop = 'DEVELOP',
+	Break = 'BREAK'
 }
 
 const storedData = browser ? window.localStorage.getItem('successTracker_habits') : null;
@@ -30,11 +36,18 @@ export function getHabits() {
 	return habits;
 }
 
-export function addHabit(name: string) {
+export function addHabit(name: string, type: HabitType) {
 	habits.update((currentHabits) => {
 		return [
 			...currentHabits,
-			{ id: uuidv4(), createdAt: new Date(), lastReset: new Date(), name: name, logs: [] }
+			{
+				id: uuidv4(),
+				createdAt: new Date(),
+				lastReset: new Date(),
+				type: type,
+				name: name,
+				logs: []
+			}
 		];
 	});
 }
