@@ -4,8 +4,15 @@ import { browser } from '$app/environment';
 
 export interface Habit {
 	id: string;
+	createdAt: Date;
+	lastReset: Date;
 	name: string;
-	count: number;
+	logs: Log[];
+}
+
+export interface Log {
+	id: string;
+	createdAt: Date;
 }
 
 const storedData = browser ? window.localStorage.getItem('successTracker_habits') : null;
@@ -25,7 +32,10 @@ export function getHabits() {
 
 export function addHabit(name: string) {
 	habits.update((currentHabits) => {
-		return [...currentHabits, { id: uuidv4(), name: name, count: 0 }];
+		return [
+			...currentHabits,
+			{ id: uuidv4(), createdAt: new Date(), lastReset: new Date(), name: name, logs: [] }
+		];
 	});
 }
 
@@ -33,7 +43,8 @@ export function logHabit(id: string) {
 	habits.update((currentHabits) => {
 		return currentHabits.map((habit: Habit) => {
 			if (habit.id === id) {
-				return { ...habit, count: habit.count++ };
+				const newLog: Log = { id: uuidv4(), createdAt: new Date() };
+				habit.logs.push(newLog);
 			}
 			return habit;
 		});

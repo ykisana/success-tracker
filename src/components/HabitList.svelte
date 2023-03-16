@@ -1,17 +1,28 @@
 <script lang="ts">
 	import { getHabits } from '@store/HabitStore';
-	import AddHabit from './Habit/AddHabit.svelte';
-	import HabitCard from './Habit/HabitCard.svelte';
+	import AddHabitCard from './HabitCard/AddHabitCard.svelte';
+	import HabitCard from './HabitCard/HabitCard.svelte';
+	import NewHabitContainer from './NewHabit/NewHabitContainer.svelte';
+	import Overlay from './Overlay.svelte';
 
-	let habits = getHabits();
+	const habits = getHabits();
+	let showNewHabitOverlay = false;
+
+	const handleAddHabitClick = () => {
+		showNewHabitOverlay = !showNewHabitOverlay;
+	};
 </script>
 
+{#if showNewHabitOverlay}
+	<Overlay onClose={handleAddHabitClick}>
+		<NewHabitContainer />
+	</Overlay>
+{/if}
 <div class="habit-list">
 	{#each $habits as habit}
-		<HabitCard id={habit.id}>{habit.id}</HabitCard>
+		<HabitCard id={habit.id}>{habit.id} {habit.logs.length}</HabitCard>
 	{/each}
-
-	<AddHabit />
+	<AddHabitCard handleClick={handleAddHabitClick} />
 </div>
 
 <style>
