@@ -20,7 +20,7 @@
 {/if}
 <div class="habit-list">
 	{#each $habits as habit}
-		<HabitCard id={habit.id}>{habit.id} {habit.logs.length}</HabitCard>
+		<HabitCard {habit} />
 	{/each}
 	<AddHabitCard handleClick={handleAddHabitClick} />
 </div>

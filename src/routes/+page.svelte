@@ -8,3 +8,11 @@
 		<HabitList />
 	</Container>
 </main>
+
+<style>
+	:global(:root) {
+		--green: #0ead69;
+		--yellow: #ffd23f;
+		--red: #ee4266;
+	}
+</style>

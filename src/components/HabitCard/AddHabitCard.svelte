@@ -4,6 +4,6 @@
 	export let handleClick: Function;
 </script>
 
-<HabitContainer isNew={true}>
+<HabitContainer>
 	<button on:click={() => handleClick()}>Click To Add Habit</button>
 </HabitContainer>
