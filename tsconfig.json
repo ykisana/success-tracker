@@ -10,9 +10,10 @@
 		"sourceMap": true,
 		"strict": true,
 		"paths": {
+			"@assets": ["./src/assets"],
 			"@components/*": ["./src/components/*"],
 			"@store/*": ["./src/store/*"],
-			"@assets": ["./src/assets"]
+			"@utils/*": ["./src/utils/*"]
 		}
 	}
 	// Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias

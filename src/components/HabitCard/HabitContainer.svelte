@@ -1,25 +1,16 @@
 <script lang="ts">
-	export let isNew: boolean = false;
-	export let isHabit: boolean = false;
+	export let backgroundColor: string = 'grey';
 </script>
 
-<div class="card" class:new={isNew} class:habit={isHabit}>
+<div class="card" style={`background-color: ${backgroundColor}`}>
 	<slot />
 </div>
 
-<style>
+<style lang="scss">
 	.card {
 		width: 75%;
 		height: 5rem;
 		border-radius: 1rem;
 		border: 1px solid #ccc;
-	}
-
-	.new {
-		background-color: lightgray;
-	}
-
-	.habit {
-		background-color: green;
 	}
 </style>

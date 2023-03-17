@@ -64,6 +64,17 @@ export function logHabit(id: string) {
 	});
 }
 
+export function updateHabit(updatedHabit: Habit) {
+	habits.update((currentHabits) => {
+		return currentHabits.map((habit: Habit) => {
+			if (habit.id === updatedHabit.id) {
+				habit = updatedHabit;
+			}
+			return habit;
+		});
+	});
+}
+
 export function deleteHabit(id: string) {
 	habits.update((currentHabits) => {
 		return currentHabits.filter((habit: Habit) => habit.id !== id);
