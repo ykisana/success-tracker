@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { tweened } from 'svelte/motion';
+	//import { interpolate } from 'd3-interpolate';
 	import { deleteHabit, logHabit, type Habit } from '@store/HabitStore';
 	import calculatePercentage from '@utils/CalculatePercentage';
 	import displayPercentage from '@utils/DisplayPercentage';
@@ -7,16 +9,23 @@
 
 	export let habit: Habit;
 
-	$: percentage = calculatePercentage(habit);
-	$: calculatedColor = mixColors(percentage);
+	const percentage = tweened(calculatePercentage(habit), {
+		duration: 500
+	});
+	$: color = mixColors($percentage, 1);
 </script>
 
-<HabitContainer backgroundColor={calculatedColor}>
+<HabitContainer backgroundColor={color}>
 	<div class="habitCard">
-		<h2>{displayPercentage(percentage)}</h2>
+		<h2>{displayPercentage($percentage)}</h2>
 		<p>Logs: {habit.logs.length}</p>
 		<button on:click={() => deleteHabit(habit.id)}>Delete Habit</button>
-		<button on:click={() => logHabit(habit.id)}>New Log</button>
+		<button
+			on:click={() => {
+				logHabit(habit.id);
+				percentage.set(calculatePercentage(habit));
+			}}>New Log</button
+		>
 	</div>
 </HabitContainer>
 

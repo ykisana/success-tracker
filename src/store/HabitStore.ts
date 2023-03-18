@@ -43,7 +43,7 @@ export function addHabit(name: string, type: HabitType) {
 			{
 				id: uuidv4(),
 				createdAt: new Date(),
-				lastReset: new Date(),
+				lastReset: new Date('02/02/2023'),
 				type: type,
 				name: name,
 				logs: []
