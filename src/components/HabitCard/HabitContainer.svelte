@@ -1,4 +1,6 @@
 <script lang="ts">
+	import type { Tweened } from 'svelte/motion';
+
 	export let backgroundColor: string = 'grey';
 </script>
 

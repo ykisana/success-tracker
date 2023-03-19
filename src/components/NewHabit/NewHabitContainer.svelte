@@ -1,9 +1,9 @@
 <script>
-	import TypePicker from './TypePicker.svelte';
+	import NewHabitForm from './NewHabitForm.svelte';
 </script>
 
 <div class="addHabitContainer">
-	<TypePicker />
+	<NewHabitForm />
 </div>
 
 <style>

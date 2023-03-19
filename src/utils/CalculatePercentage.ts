@@ -5,6 +5,7 @@ export default function calculatePercentage(habit: Habit): number {
 	const logsCount = habit.logs.length;
 
 	if (habit.type == HabitType.Develop) {
+		if (logsCount == 0) return 0;
 		if (logsCount >= daysSinceReset) return 100;
 		return (logsCount / daysSinceReset) * 100;
 	}
