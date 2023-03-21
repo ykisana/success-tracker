@@ -1,12 +1,13 @@
 <script lang="ts">
 	import { getHabits, type Habit } from '@store/HabitStore';
 	import { onMount } from 'svelte';
+	import type { Writable } from 'svelte/store';
 	import AddHabitCard from './HabitCard/AddHabitCard.svelte';
 	import HabitCard from './HabitCard/HabitCard.svelte';
-	import NewHabitContainer from './NewHabit/NewHabitContainer.svelte';
+	import CreateHabitContainer from './CreateHabit/CreateHabitContainer.svelte';
 	import Overlay from './Shared/Overlay.svelte';
 
-	let habits: Habit[] = [];
+	let habits: Writable<Habit[]>;
 	let loading = true;
 
 	onMount(async () => {
@@ -25,11 +26,11 @@
 {:else}
 	{#if showNewHabitOverlay}
 		<Overlay onClose={handleAddHabitClick}>
-			<NewHabitContainer />
+			<CreateHabitContainer />
 		</Overlay>
 	{/if}
 	<div class="habit-list">
-		{#each habits as habit}
+		{#each $habits as habit}
 			<HabitCard {habit} />
 		{/each}
 		<AddHabitCard handleClick={handleAddHabitClick} />
