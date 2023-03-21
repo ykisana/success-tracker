@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { get, writable } from 'svelte/store';
+import { writable } from 'svelte/store';
 import { browser } from '$app/environment';
 
 export interface Habit {
@@ -7,8 +7,13 @@ export interface Habit {
 	createdAt: Date;
 	lastReset: Date;
 	type: HabitType;
-	name: string;
+	name?: string;
 	logs: Log[];
+}
+
+export interface NewHabit {
+	name?: string;
+	type: HabitType;
 }
 
 export interface Log {
@@ -33,19 +38,19 @@ habits.subscribe((value) => {
 });
 
 export async function getHabits() {
-	return get(habits);
+	return habits;
 }
 
-export function addHabit(name: string, type: HabitType) {
+export function createHabit(newHabit: NewHabit) {
 	habits.update((currentHabits) => {
 		return [
 			...currentHabits,
 			{
 				id: uuidv4(),
+				name: newHabit.name,
 				createdAt: new Date(),
 				lastReset: new Date('02/02/2023'),
-				type: type,
-				name: name,
+				type: newHabit.type,
 				logs: []
 			}
 		];
