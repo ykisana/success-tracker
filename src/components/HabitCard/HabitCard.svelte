@@ -17,8 +17,8 @@
 
 <HabitContainer backgroundColor={color}>
 	<div class="habitCard">
+		<h2>{habit.name}</h2>
 		<h2>{displayPercentage($percentage)}</h2>
-		<p>Logs: {habit.logs.length}</p>
 		<button on:click={() => deleteHabit(habit.id)}>Delete Habit</button>
 		<button
 			on:click={() => {

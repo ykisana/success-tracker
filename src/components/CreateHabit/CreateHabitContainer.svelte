@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { NewHabit } from '@store/HabitStore';
+	import { createHabit, type NewHabit } from '@store/HabitStore';
 	import { handleTabChange, Tab } from './CreateHabitNavigation';
 	import HabitDetailsForm from './HabitDetailsForm.svelte';
 	import TypeSelector from './TypeSelector.svelte';
@@ -21,7 +21,13 @@
 		/>
 	{/if}
 	{#if tab === Tab.DETAILS}
-		<HabitDetailsForm {newHabit} />
+		<HabitDetailsForm
+			on:detailsEntered={(e) => {
+				changeTabs();
+				newHabit.name = e.detail;
+				createHabit(newHabit);
+			}}
+		/>
 	{/if}
 </div>
 
@@ -31,5 +37,6 @@
 		flex-direction: column;
 		justify-content: center;
 		justify-items: center;
+		padding: 2rem;
 	}
 </style>
